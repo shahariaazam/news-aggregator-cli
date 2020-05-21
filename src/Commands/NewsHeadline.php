@@ -43,6 +43,11 @@ class NewsHeadline extends Command
             $sourceMaps = new SourceMaps();
             $provider = $sourceMaps->getHeadLineProviderBySlug($providerSlug);
 
+            if(empty($provider)){
+                $output->writeln("Invalid news source");
+                return 1;
+            }
+
             $aggregator = Aggregator::init();
             $headlines = $aggregator->getHeadlines(
                 $provider['provider_class'],   // News provider class

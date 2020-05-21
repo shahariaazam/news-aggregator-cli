@@ -41,18 +41,18 @@ class SourceMaps
         return [
             [
                 'provider_slug' => 'prothomalo-nortamerica-category',
-                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\NorthAmericaCategory',
-                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\ParserList',
+                'provider_class' => NorthAmericaCategory::class,
+                'provider_parser' => ParserList::class,
                 'parse_type' => self::PARSE_TYPE_HEADLINE
             ],[
                 'provider_slug' => 'prothomalo-nortamerica-category',
-                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\NorthAmericaCategory',
-                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\ParserSingle',
+                'provider_class' => NorthAmericaCategory::class,
+                'provider_parser' => ParserSingle::class,
                 'parse_type' => self::PARSE_TYPE_DETAILS
             ],[
                 'provider_slug' => 'bbc-home',
-                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\BBC\BBC',
-                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\BBC\HomepageParser',
+                'provider_class' => BBC::class,
+                'provider_parser' => HomepageParser::class,
                 'parse_type' => self::PARSE_TYPE_HEADLINE
             ]
         ];
@@ -84,7 +84,12 @@ class SourceMaps
         $pr = array_filter($this->lists, function($source) use ($slug) {
             return $slug === $source['provider_slug'] && $source['parse_type'] === self::PARSE_TYPE_HEADLINE;
         });
-        return $pr[0];
+
+        if(count($pr) < 1){
+            return null;
+        }
+
+        return array_values($pr)[0];
     }
 
     /**
