@@ -29,8 +29,9 @@ class NewsHeadline extends Command
             ->setDescription('Show headlines of news')
             ->setDefinition(
                 new InputDefinition([
-                    new InputOption('list', 'l', InputOption::VALUE_REQUIRED),
-                    new InputOption('with-url', 'u')
+                    new InputOption('list', 'l', InputOption::VALUE_REQUIRED, 'Show list of headline'),
+                    new InputOption('with-url', 'u', InputOption::VALUE_NONE, 'With news URL'),
+                    new InputOption('json', 'j', InputOption::VALUE_NONE, 'Output in JSON format')
                 ])
             );
     }
@@ -54,8 +55,28 @@ class NewsHeadline extends Command
                 $provider['provider_parser']  // Parser class
             );
 
-            foreach ($headlines as $headline){
-                $output->writeln($headline->getTitle());
+            if($input->getOption('json')){
+                $data = [];
+                foreach ($headlines as $headline){
+                    if($input->getOption('with-url')){
+                        $data[] = ['headline' => $headline->getTitle(), 'url' => (string) $headline->getUrl()];
+                    }else{
+                        $data[] = ['headline' => $headline->getTitle()];
+                    }
+                }
+
+                $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+            }else{
+                foreach ($headlines as $headline){
+                    if($input->getOption('with-url')){
+                        $output->writeln($headline->getTitle());
+                        $output->writeln("Link: " . $headline->getUrl());
+                    }else{
+                        $output->writeln($headline->getTitle());
+                    }
+
+                    $output->writeln("--------------");
+                }
             }
         }
 
