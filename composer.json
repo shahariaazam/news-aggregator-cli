@@ -9,11 +9,6 @@
       "email": "shaharia.azam@gmail.com"
     }
   ],
-  "config": {
-    "platform": {
-      "php": "7.2.5"
-    }
-  },
   "require": {
     "shahariaazam/news-aggregator": "dev-master",
     "symfony/console": "^5.0",

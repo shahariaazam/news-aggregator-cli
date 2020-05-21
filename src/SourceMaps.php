@@ -41,18 +41,18 @@ class SourceMaps
         return [
             [
                 'provider_slug' => 'prothomalo-nortamerica-category',
-                'provider_class' => NorthAmericaCategory::class,
-                'provider_parser' => ParserList::class,
+                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\NorthAmericaCategory',
+                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\ParserList',
                 'parse_type' => self::PARSE_TYPE_HEADLINE
             ],[
                 'provider_slug' => 'prothomalo-nortamerica-category',
-                'provider_class' => NorthAmericaCategory::class,
-                'provider_parser' => ParserSingle::class,
+                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\NorthAmericaCategory',
+                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\ProthomAlo\ParserSingle',
                 'parse_type' => self::PARSE_TYPE_DETAILS
             ],[
                 'provider_slug' => 'bbc-home',
-                'provider_class' => BBC::class,
-                'provider_parser' => HomepageParser::class,
+                'provider_class' => '\Shaharia\NewsAggregator\NewsProvider\BBC\BBC',
+                'provider_parser' => '\Shaharia\NewsAggregator\NewsProvider\BBC\HomepageParser',
                 'parse_type' => self::PARSE_TYPE_HEADLINE
             ]
         ];
